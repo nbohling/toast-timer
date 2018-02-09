@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Toastmasters Timer</title>
+  <script src="js/jquery-3.3.1.min.js"></script>
+  <script src="js/jquery.color-2.1.2.min.js"></script>
+  <script type="text/javascript" src="js/timer.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+  <div id="wrapper" class="indicator">
+    <div id="controls">
+      <p>Press ? for help.<br />Press <strong>SPACE</strong> to start and stop.</p>
+    </div>
+    <div id="content">
+      <p class="center big" id="timer">0:00.0</p>
+    </div>
+    <div id="footer"><p>Notifications at: <span id="stop1" class="green">60</span> / <span id="stop2" class="yellow">90</span> / <span id="stop3" class="red">120</span> / <span id="stop4" class="black">150</span> <span id="units">s</units></p></div>
+  </div>
+  <div id="help_page">
+    <h2>ToastMasters Timer</h2>
+    <p>This is a basic timer to indicate to a speaker how long they have been speaking through the use of color.</p>
+    <ul>
+      <li>Green indicates that the speaker has passed the first time checkpoint and is free to continue speaking..</li>
+      <li>Yellow indicates that the speaker has passed the second checkpoint and should start wrapping up.</li>
+      <li>Red indicates that the speaker has passed the second checkpoint and should stop as soon as possible.</li>
+      <li>Black indicates that the speaker has overrun their time and is disqualified from voting.</li>
+    </ul>
+    <p><strong>Controls:</strong></p>
+    <ul>
+      <li><strong>SPACE</strong> : Start and stop timer. Continues and does not reset the timer.</li>
+      <li><strong>ENTER</strong> : Start and stop timer. Resets the timer.</li>
+      <li><strong>r</strong> : Reset the timer.</li>
+      <li><strong>+ and -</strong> : Adjust the time of the first notification.</li>
+      <li><strong>[ and ]</strong> : change interval between indications.</li>
+      <li><strong>1</strong> : Quick ref 1/1.5/2m timer.</li>
+      <li><strong>2</strong> : Quick ref 3/4/5m timer.</li>
+    </ul>
+  </div>
+</body>
+</html>

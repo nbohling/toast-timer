@@ -1,7 +1,7 @@
 // Some globals for the app
 var myTimer = false;
 var startedTime = 0;
-var pausedValue = 0;
+var elapsedTime = 0;
 var currentInterval = 0;
 var time1 = 60;
 var time2 = 30;
@@ -57,9 +57,12 @@ $(document).ready(function() {
       case 63: // ?
         $("#help_page").fadeToggle(transitionTime);
         break;
-      case 48: // 0 -- reset
       case 114: // r - reset
         reset();
+        break;
+      case 48: // 0 - shorted preset
+        time1 = 5;
+        time2 = 5;
         break;
       case 49: // 1
         time1 = 60;
@@ -80,7 +83,7 @@ $(document).ready(function() {
 // Toggles whether timer is running or not
 // Reset indicates whether to start from zero or continue from last time
 function timerToggle(reset) {
-  if( myTimer ) stopTimer(reset);
+  if( myTimer ) stopTimer();
   else startTimer(reset);
 }
 
@@ -92,15 +95,14 @@ function startTimer(reset) {
     startedTime = Date.now();
     currentInterval = 0;
   } else {
-    startedTime = Date.now() - pausedValue;
+    startedTime = Date.now() - elapsedTime;
   }
   myTimer = setInterval(updateTimer, 25);
 }
 
 // Stops the timer event loop
-function stopTimer(reset) {
-  pausedValue = Date.now() - startedTime;
-  if(reset) $(".indicator").animate({backgroundColor: gray}, transitionTime);
+function stopTimer() {
+  //elapsedTime = Date.now() - startedTime;
   window.clearInterval(myTimer);
   myTimer = false;
   console.log("Stopped");
@@ -108,7 +110,9 @@ function stopTimer(reset) {
 
 // Updates the timer display
 function updateTimer() {
-  ms = Date.now() - startedTime;
+  if(myTimer) elapsedTime = Date.now() - startedTime
+
+  ms = elapsedTime;
   m = Math.floor(ms / (1000 * 60));
   ms = ms - (m*1000*60);
   s = Math.floor(ms / 1000);
@@ -119,31 +123,22 @@ function updateTimer() {
   $("#timer").text(timeString);
 
   // See if we jumped over a barrier
-  switch(currentInterval){
-    case 0:
-      if(s >= time1) {
-        $(".indicator").animate({backgroundColor: green}, transitionTime);
-        currentInterval++;
-      }
-      break;
-    case 1:
-      if(s >= time1 + time2) {
-        $(".indicator").animate({backgroundColor: yellow}, transitionTime);
-        currentInterval++;
-      }
-      break;
-    case 2:
-      if( s >= time1 + (time2*2) ) {
-        $(".indicator").animate({backgroundColor: red}, transitionTime);
-        currentInterval++;
-      }
-      break;
-    case 3:
-      if( s >= time1 + (time2*3) ) {
-        $(".indicator").animate({backgroundColor: black}, transitionTime);
-        currentInterval++;
-      }
-      break;
+  if( currentInterval != 0 && s >= 0 && s < time1 ) {
+    $(".indicator").animate({backgroundColor: gray}, transitionTime);
+    currentInterval = 0;
+  }
+  if( currentInterval != 1 && s >= time1 && s < time1 + time2 ) {
+    $(".indicator").animate({backgroundColor: green}, transitionTime);
+    currentInterval = 1;
+  } else if( currentInterval != 2 && s >= time1 + time2 && s < time1 + (time2*2) ) {
+    $(".indicator").animate({backgroundColor: yellow}, transitionTime);
+    currentInterval = 2;
+  } else if( currentInterval != 3 && s >= time1 + (time2*2) && s < time1 + (time2*3) ) {
+    $(".indicator").animate({backgroundColor: red}, transitionTime);
+    currentInterval = 3;
+  } else if( currentInterval != 4 && s >= time1 + (time2*3) ) {
+    $(".indicator").animate({backgroundColor: black}, transitionTime);
+    currentInterval = 4;
   }
 }
 
@@ -162,6 +157,7 @@ function updateIntervals() {
     $("#stop4").text(time1+(time2*3));
     $("#units").text("sec");
   }
+  updateTimer();
 }
 
 // Resets everything and stops any active timers.
@@ -170,7 +166,7 @@ function reset() {
   currentInterval = 0;
   if( myTimer ) stopTimer();
   startedTime = Date.now();
-  pausedValue = 0;
+  elapsedTime = 0;
   updateTimer();
   updateIntervals();
 }

@@ -113,6 +113,7 @@ function updateTimer() {
   if(myTimer) elapsedTime = Date.now() - startedTime
 
   ms = elapsedTime;
+  sec = ms/1000;
   m = Math.floor(ms / (1000 * 60));
   ms = ms - (m*1000*60);
   s = Math.floor(ms / 1000);
@@ -123,20 +124,19 @@ function updateTimer() {
   $("#timer").text(timeString);
 
   // See if we jumped over a barrier
-  if( currentInterval != 0 && s >= 0 && s < time1 ) {
+  if( currentInterval != 0 && sec >= 0 && sec < time1 ) {
     $(".indicator").animate({backgroundColor: gray}, transitionTime);
     currentInterval = 0;
-  }
-  if( currentInterval != 1 && s >= time1 && s < time1 + time2 ) {
+  } else if( currentInterval != 1 && sec >= time1 && sec < time1 + time2 ) {
     $(".indicator").animate({backgroundColor: green}, transitionTime);
     currentInterval = 1;
-  } else if( currentInterval != 2 && s >= time1 + time2 && s < time1 + (time2*2) ) {
+  } else if( currentInterval != 2 && sec >= time1 + time2 && sec < time1 + (time2*2) ) {
     $(".indicator").animate({backgroundColor: yellow}, transitionTime);
     currentInterval = 2;
-  } else if( currentInterval != 3 && s >= time1 + (time2*2) && s < time1 + (time2*3) ) {
+  } else if( currentInterval != 3 && sec >= time1 + (time2*2) && sec < time1 + (time2*3) ) {
     $(".indicator").animate({backgroundColor: red}, transitionTime);
     currentInterval = 3;
-  } else if( currentInterval != 4 && s >= time1 + (time2*3) ) {
+  } else if( currentInterval != 4 && sec >= time1 + (time2*3) ) {
     $(".indicator").animate({backgroundColor: black}, transitionTime);
     currentInterval = 4;
   }

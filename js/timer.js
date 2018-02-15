@@ -109,6 +109,7 @@ function stopTimer(reset) {
 // Updates the timer display
 function updateTimer() {
   ms = Date.now() - startedTime;
+  sec = ms/1000;
   m = Math.floor(ms / (1000 * 60));
   ms = ms - (m*1000*60);
   s = Math.floor(ms / 1000);
@@ -121,25 +122,25 @@ function updateTimer() {
   // See if we jumped over a barrier
   switch(currentInterval){
     case 0:
-      if(s >= time1) {
+      if(sec >= time1) {
         $(".indicator").animate({backgroundColor: green}, transitionTime);
         currentInterval++;
       }
       break;
     case 1:
-      if(s >= time1 + time2) {
+      if(sec >= time1 + time2) {
         $(".indicator").animate({backgroundColor: yellow}, transitionTime);
         currentInterval++;
       }
       break;
     case 2:
-      if( s >= time1 + (time2*2) ) {
+      if( sec >= time1 + (time2*2) ) {
         $(".indicator").animate({backgroundColor: red}, transitionTime);
         currentInterval++;
       }
       break;
     case 3:
-      if( s >= time1 + (time2*3) ) {
+      if( sec >= time1 + (time2*3) ) {
         $(".indicator").animate({backgroundColor: black}, transitionTime);
         currentInterval++;
       }

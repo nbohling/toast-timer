@@ -107,8 +107,9 @@ div#wrapper {
 
 #help_page ul {
 	list-style-type: square;
-	list-style-position: inside;
+	list-style-position: outside;
 	margin-bottom: 1em;
+	padding-left: 1.5em;
 }
 
 #help_page h2 {
@@ -118,7 +119,7 @@ div#wrapper {
 }
 
 #help_page p {
-
+	margin-bottom: 0.5em;
 }
 
 /* Styles */

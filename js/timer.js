@@ -13,7 +13,7 @@ var green = "#66B464";
 var yellow = "#FABC3C";
 var red = "#FF5B2D";
 var black = "#000000"
-
+var white = "#FFF"
 // Setup when document loaded.
 $(document).ready(function() {
   reset();
@@ -22,6 +22,7 @@ $(document).ready(function() {
   $(".yellow").animate({color: yellow}, transitionTime);
   $(".red").animate({color: red}, transitionTime);
   $(".black").animate({color: black}, transitionTime);
+  blink_red("#controls");
 
   // Setup controller for key strokes
   $(document).keypress(function(event) {
@@ -145,10 +146,10 @@ function updateTimer() {
 // Updates the interval displays
 function updateIntervals() {
   if(time1 >= 60) {
-    $("#stop1").text(time1/60);
-    $("#stop2").text((time1+time2)/60);
-    $("#stop3").text((time1+(time2*2))/60);
-    $("#stop4").text((time1+(time2*3))/60);
+    $("#stop1").text(toMinuteAndSeconds(time1));
+    $("#stop2").text(toMinuteAndSeconds(time1+time2));
+    $("#stop3").text(toMinuteAndSeconds(time1+(time2*2)));
+    $("#stop4").text(toMinuteAndSeconds(time1+(time2*3)));
     $("#units").text("min");
   } else {
     $("#stop1").text(time1);
@@ -158,6 +159,15 @@ function updateIntervals() {
     $("#units").text("sec");
   }
   updateTimer();
+}
+
+function toMinuteAndSeconds(seconds) {
+  if(seconds < 60) return ""+seconds
+  else {
+    minutes = Math.floor(seconds/60);
+    seconds2 = seconds - (minutes*60);
+    return minutes+":"+ensure2Digits(seconds2);
+  }
 }
 
 // Resets everything and stops any active timers.
@@ -175,4 +185,14 @@ function reset() {
 function ensure2Digits(number) {
   if( number < 10 ) return "0"+number;
   else return number;
+}
+
+function blink_red(selector) {
+  var blink=6;
+  var intID = window.setInterval(function() {
+    if(blink%2==0) $(selector).animate({color: green}, 300);
+    else $(selector).animate({color: white}, 300);
+    if(--blink==0) window.clearInterval(intID);
+  },
+  500);
 }

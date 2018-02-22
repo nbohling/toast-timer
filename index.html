@@ -10,7 +10,7 @@
 <body>
   <div id="wrapper" class="indicator">
     <div id="controls">
-      <p>Press ? for help.<br />Press <strong>SPACE</strong> to start and stop.</p>
+      <p>Press ? for help.<br />Press <strong>ENTER or SPACE</strong> to start and stop.</p>
     </div>
     <div id="content">
       <p class="center big" id="timer">0:00.0</p>
@@ -19,23 +19,28 @@
   </div>
   <div id="help_page">
     <h2>ToastMasters Timer</h2>
-    <p>This is a basic timer to indicate to a speaker how long they have been speaking through the use of color.</p>
+    <p>A basic timer to indicate to a speaker how long they have been speaking through the use of color. The intervals are displayed at the lower left corner of the screen and are adjustable.</p>
+    <p>Once the timer is started, the background of the page will change through 5 colors:</p>
     <ul>
-      <li>Green indicates that the speaker has passed the first time checkpoint and is free to continue speaking..</li>
-      <li>Yellow indicates that the speaker has passed the second checkpoint and should start wrapping up.</li>
-      <li>Red indicates that the speaker has passed the second checkpoint and should stop as soon as possible.</li>
-      <li>Black indicates that the speaker has overrun their time and is disqualified from voting.</li>
+      <li><span class="gray">Gray</span> is the starting color and means the speaker has plenty of time.</li>
+      <li><span class="green">Green</span> indicates that the speaker has passed the first time checkpoint and is free to continue speaking.</li>
+      <li><span class="yellow">Yellow</span> indicates that the speaker has passed the second checkpoint and should start wrapping up.</li>
+      <li><span class="red">Red</span> indicates that the speaker has passed the second checkpoint and should stop as soon as possible.</li>
+      <li><span class="black">Black</span> indicates that the speaker has overrun their time and is disqualified from voting.</li>
     </ul>
     <p><strong>Controls:</strong></p>
     <ul>
-      <li><strong>SPACE</strong> : Start and stop timer. Continues and does not reset the timer.</li>
-      <li><strong>ENTER</strong> : Start and stop timer. Resets the timer.</li>
-      <li><strong>r</strong> : Reset the timer.</li>
-      <li><strong>+ and -</strong> : Adjust the time of the first notification.</li>
-      <li><strong>[ and ]</strong> : change interval between indications.</li>
-      <li><strong>1</strong> : Quick ref 1/1.5/2m timer.</li>
-      <li><strong>2</strong> : Quick ref 3/4/5m timer.</li>
+      <li><strong>SPACE</strong> : Start and stop timer. Continues from the last stop.</li>
+      <li><strong>ENTER</strong> : Start and stop timer. Resets timer to zero when starting.</li>
+      <li><strong>r</strong> : Reset the timer to zero.</li>
+      <li><strong>+ and -</strong> : Add or remove 15 seconds to the notification times.</li>
+      <li><strong>[ and ]</strong> : Add or remove 15 seconds to the interval between the different indications.</li>
+      <li><strong>1</strong> : Quick reference 1/1.5/2m timer.</li>
+      <li><strong>2</strong> : Quick reference 3/4/5m timer.</li>
+      <li><strong>?</strong> : Show/hide this help information.</li>
     </ul>
+    <p>The code is available at <a href="https://github.com/nbohling/toast-timer" target="_blank">https://github.com/nbohling/toast-timer</a></p>
+    <p>Press <strong>?</strong> to hide this help panel.</p>
   </div>
 </body>
 </html>

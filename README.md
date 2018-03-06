@@ -1,6 +1,7 @@
 # toast-timer
 ### Timer for Toastmasters
 A basic timer to indicate to a speaker how long they have been speaking through the use of color. The intervals are displayed at the lower left corner of the screen and are adjustable.
+
 ![screenshot](https://github.com/nbohling/toast-timer/blob/master/timer1.jpeg)
 
 Once the timer is started, the background of the page will change through 5 colors:

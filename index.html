@@ -4,8 +4,10 @@
   <title>Toastmasters Timer</title>
   <script src="js/jquery-3.3.1.min.js"></script>
   <script src="js/jquery.color-2.1.2.min.js"></script>
+  <script src="js/jquery-ui.min.js"></script>
   <script type="text/javascript" src="js/timer.js"></script>
   <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link rel="stylesheet" type="text/css" href="css/jquery-ui.min.css">
 </head>
 <body>
   <div id="wrapper" class="indicator">
@@ -15,7 +17,17 @@
     <div id="content">
       <p class="center big" id="timer">0:00.0</p>
     </div>
-    <div id="footer"><p>Notifications at: <span id="stop1" class="green">60</span> / <span id="stop2" class="yellow">90</span> / <span id="stop3" class="red">120</span> / <span id="stop4" class="black">150</span> <span id="units">s</units></p></div>
+    <div id="footer">
+      <div class="interval-list">Notifications at:
+        <div class="intervals">
+          <span id="stop1" class="int_stop1 green">60</span> /
+          <span id="stop2" class="int_stop2 yellow">90</span> /
+          <span id="stop3" class="int_stop3 red">120</span> /
+          <span id="stop4" class="int_stop4 black">150</span>
+          <span id="units" class="int_units">s</span>
+        </div>
+      </div>
+    </div>
   </div>
   <div id="help_page">
     <h2>ToastMasters Timer</h2>
@@ -33,14 +45,35 @@
       <li><strong>SPACE</strong> : Start and stop timer. Continues from the last stop.</li>
       <li><strong>ENTER</strong> : Start and stop timer. Resets timer to zero when starting.</li>
       <li><strong>r</strong> : Reset the timer to zero.</li>
+      <li><strong>c</strong> : Show / hide the control pane.</li>
       <li><strong>+ and -</strong> : Add or remove 15 seconds to the notification times.</li>
       <li><strong>[ and ]</strong> : Add or remove 15 seconds to the interval between the different indications.</li>
-      <li><strong>1</strong> : Quick reference 1/1.5/2m timer.</li>
-      <li><strong>2</strong> : Quick reference 3/4/5m timer.</li>
+      <li><strong>Presets:</strong><ul>
+        <li><strong>1</strong> : Quick reference 1/1.5/2m timer.</li>
+        <li><strong>2</strong> : Quick reference 2/2:30/3m timer.</li>
+        <li><strong>3</strong> : Quick reference 3/4/5m timer.</li>
+        <li><strong>4</strong> : Quick reference 4/5/6m timer.</li>
+      </ul></li>
       <li><strong>?</strong> : Show/hide this help information.</li>
     </ul>
     <p>The code is available at <a href="https://github.com/nbohling/toast-timer" target="_blank">https://github.com/nbohling/toast-timer</a></p>
     <p>Press <strong>?</strong> to hide this help panel.</p>
+  </div>
+  <div id="control_panel">
+    <h3>Controls:</h3>
+    <button class="button start_stop">Start / Stop</button>
+    <button class="button reset">Reset</button>
+    <br /><br />
+    <label>First notification time: <span class="int_stop1 green">&nbsp;</span> <span class="int_units">s</span></label>
+    <div class="int_slider_start slider">&nbsp;</div>
+    <label>Interval between notifications: <span class="int_between green">&nbsp;</span> <span class="int_units">s</span></label>
+    <div class="int_slider_between slider">&nbsp;</div>
+    <br /><br />
+    <div class="presets">
+      <label>Presets</label><br />
+      <button class="button preset preset_speaker">Speaker</button>
+      <button class="button preset preset_table_topics">Table topics</button>
+    </div>
   </div>
 </body>
 </html>

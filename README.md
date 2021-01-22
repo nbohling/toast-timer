@@ -4,7 +4,9 @@
 
 A basic timer to indicate to a speaker how long they have been speaking through the use of color. The intervals are displayed at the lower left corner of the screen and are adjustable.
 
-![screenshot](https://raw.githubusercontent.com/nbohling/toast-timer/master/img/timer1.jpeg)
+You can access the timer via [github pages](https://nbohling.github.io/toast-timer/)
+
+![screenshot](https://raw.githubusercontent.com/nbohling/toast-timer/master/img/timer1.png)
 
 Once the timer is started, the background of the page will change through 5 colors:
 
@@ -28,4 +30,5 @@ Once the timer is started, the background of the page will change through 5 colo
   - **3** : Quick reference 3/4/5m timer.
   - **4** : Quick reference 4/5/6m timer.
   - **5** : Quick reference 5/6/7m timer.
+  - **0** : Quick ref to 5/10/15s timer.
 - **?** : Show/hide the help information.

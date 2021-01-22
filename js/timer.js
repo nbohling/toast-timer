@@ -1,19 +1,20 @@
 // Some globals for the app
-var myTimer = false;
-var startedTime = 0;
-var elapsedTime = 0;
-var currentInterval = 0;
-var first_time = 60;
-var interval_time = 30;
-var transitionTime = 500;
+let myTimer = false;
+let startedTime = 0;
+let elapsedTime = 0;
+let currentInterval = 0;
+let first_time = 60;
+let interval_time = 30;
+let transitionTime = 500;
+let history = [];
 
 // Color definitions. Change color scheme by adjusting these.
-var gray = "#334141";
-var green = "#66B464";
-var yellow = "#FABC3C";
-var red = "#FF5B2D";
-var black = "#000000";
-var white = "#FFF";
+const gray = "#334141";
+const green = "#66B464";
+const yellow = "#FABC3C";
+const red = "#FF5B2D";
+const black = "#000000";
+const white = "#FFF";
 
 // Setup when document loaded.
 $(function() {
@@ -35,7 +36,7 @@ $(function() {
     slide: (event, ui) => {
       first_time = ui.value;
       updateIntervals();
-    }
+    },
   });
 
   // Slider for interval between notifications
@@ -47,7 +48,7 @@ $(function() {
     slide: (event, ui) => {
       interval_time = ui.value;
       updateIntervals();
-    }
+    },
   });
 
   // Start/Stop button
@@ -164,6 +165,9 @@ $(function() {
   function startTimer(reset) {
     //$(".indicator").animate({backgroundColor: "green"}, 1transitionTime);
     if (reset) {
+      // Store off the history event
+      addHistory();
+
       $(".indicator").animate({ backgroundColor: gray }, transitionTime);
       startedTime = Date.now();
       currentInterval = 0;
@@ -268,7 +272,7 @@ $(function() {
 
   // Convert seconds to a string that represents minutes and seconds
   function toMinuteAndSeconds(seconds) {
-    if (seconds < 60) return "0:" + seconds;
+    if (seconds < 60) return "0:" + ensure2Digits(seconds);
     else {
       minutes = Math.floor(seconds / 60);
       seconds2 = seconds - minutes * 60;
@@ -278,6 +282,8 @@ $(function() {
 
   // Resets everything and stops any active timers.
   function reset() {
+    addHistory();
+    // Reset to gray
     $(".indicator").animate({ backgroundColor: gray }, transitionTime);
     currentInterval = 0;
     if (myTimer) stopTimer();
@@ -285,6 +291,23 @@ $(function() {
     elapsedTime = 0;
     updateTimer();
     updateIntervals();
+  }
+
+  function addHistory() {
+    if (elapsedTime == 0) return;
+
+    let timeString = toMinuteAndSeconds(Math.floor(elapsedTime / 100) / 10);
+
+    history.push(timeString);
+    if (history.length > 10) history.shift();
+
+    // update the UI
+    let historyBox = $("#history_list");
+    historyBox.find(".history_entry").remove();
+    // Add new entries
+    history.forEach(element => {
+      historyBox.append(`<li class="history_entry">${element}</li>`);
+    });
   }
 
   // Helper function to ensure 2 digits on a number.

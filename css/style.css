@@ -30,12 +30,34 @@ div#wrapper {
   z-index: 1000;
 }
 
-#content {
+#timer_box {
   position: absolute;
   text-align: right;
   bottom: 0px;
   right: 0px;
   padding-right: 2em;
+}
+
+#history {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  color: #ccc;
+  padding-top: 2em;
+  padding-right: 2em;
+}
+
+#history p {
+  border-bottom: 1px dashed #eee;
+  color: white;
+}
+
+#history ul {
+  text-align: right;
+}
+
+#history ul li {
+  padding-top: 0.5em;
 }
 
 #help_page {
